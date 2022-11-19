@@ -88,7 +88,8 @@ int main(int argc, char *argv[]){
 		for(int x = 0; x < W; x++){
 			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 			if((c = map[x][y].ori) != -1){
-				SDL_SetRenderDrawColor(renderer, c, c, c, 255);
+				c += rand() % 20 - 10;
+				SDL_SetRenderDrawColor(renderer, c-10, c, c, 255);
 			}
 			SDL_RenderDrawPoint(renderer, x, y);
 		}
