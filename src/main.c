@@ -42,9 +42,17 @@ int main(int argc, char *argv[]){
 	Position init_pos[INITNUM];
 	srand(time(NULL));
 	for(int i = 0; i < INITNUM; i++){
-		init_cry[i] = (Crystal){{rand() % GMAX+GMIN, rand() % GMAX+GMIN, rand() % GMAX+GMIN, rand() % GMAX+GMIN}, rand() % SMAX+SMIN, greyscale[rand() % 4]};
+		init_cry[i] = (Crystal){
+			{
+				rand() % GMAX+GMIN,
+				rand() % GMAX+GMIN,
+				rand() % GMAX+GMIN,
+				rand() % GMAX+GMIN
+			},
+			rand() % SMAX+SMIN,
+			greyscale[rand() % 4]
+		};
 		init_pos[i] = (Position){rand() % W, rand() % H};
-		printf("Number: %d\tGrowingrates: %d, %d, %d, %d\tPosition: %d, %d\tSpawn: %d\tOrientation: %d\n", i, init_cry[i].grow[0], init_cry[i].grow[1], init_cry[i].grow[2], init_cry[i].grow[3], init_pos[i].x, init_pos[i].y, init_cry[i].spawn, init_cry[i].ori);
 	}
 
 	for(int i = 0; i < ITER; i++){
@@ -57,7 +65,7 @@ int main(int argc, char *argv[]){
 		for(int y = 0; y < H; y++){
 			for(int x = 0; x < W; x++){
 				Crystal curr = map[x][y];
-				if(curr.ori > -1 && i >= curr.spawn){
+				if(curr.ori > -1){
 					for(int dir = 0; dir < 4; dir++){
 						for(int dist = 0; dist < curr.grow[dir]; dist++){
 							int check_pos_x[4] = {x, x + dist + 1, x, x - dist - 1};
